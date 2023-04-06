@@ -1,0 +1,121 @@
+﻿@model IEnumerable<Recipe>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Listagem de Receitas</title>
+    <style>
+        /* Estilo CSS para a página */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 40px;
+        }
+
+        .receipes {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+
+        }
+
+        .recipe {
+            margin: 50px auto;
+            width: 80%;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            margin-right: 1%;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .recipe h2 {
+                font-size: 30px;
+                margin-bottom: 20px;
+            }
+
+            .recipe img {
+                display: block;
+                margin: auto;
+                width: 60%;
+                margin-bottom: 20px;
+            }
+
+            .recipe p {
+                margin-bottom: 20px;
+                font-size: 18px;
+                line-height: 24px;
+            }
+
+            .recipe ul {
+                margin-bottom: 20px;
+                font-size: 18px;
+                line-height: 24px;
+            }
+
+            .recipe li {
+                margin-left: 20px;
+            }
+
+            .recipe a {
+                display: block;
+                text-align: right;
+                font-size: 18px;
+                text-decoration: none;
+                color: #000;
+            }
+
+                .recipe a:hover {
+                    color: #666;
+                }
+
+            .recipe .category {
+                margin-top: 20px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+    </style>
+</head>
+<body>
+    <h1>Listagem de Receitas</h1>
+
+    <div class="receipes">
+        @foreach (var recipe in Model)
+        {
+                <div class="recipe">
+                    <h2>@recipe.Title</h2>
+                    <img src="@recipe.Foto" alt="@recipe.Title">
+                    <p>@recipe.Description</p>
+
+                    <h3>Ingredientes:</h3>
+                    <ul>
+                        @foreach (var ingredient in recipe.Ingredients)
+                        {
+                            <li>@ingredient.Name</li>
+                        }
+                    </ul>
+
+                    <h3>Modo de Preparo:</h3>
+                    <ol>
+                        @foreach (var step in recipe.PrepareModes)
+                        {
+                            <li>@step.Name</li>
+                        }
+                    </ol>
+
+                    <div class="category">
+                        Categoria: <span>@recipe.Category.Title</span>
+                    </div>
+                </div>
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MasterChef.Api", "MasterChef.Api\MasterChef.Api.csproj", "{BFF0CE81-08F4-4271-A4BF-6787857EF006}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1EB50D47-6FF9-4EDA-A385-8A36597FA3AE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E9480969-9122-416F-AD8E-3B92231A43B4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masterchef.Domain", "Masterchef.Domain\Masterchef.Domain.csproj", "{2B754D06-48D5-45E8-9DD7-2D866E2F2EDD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MasterChef.Persistence", "MasterChef.Infra\MasterChef.Persistence.csproj", "{3541733A-9361-43BA-AF20-F1FA355B32EB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masterchef.Service", "Masterchef.Service\Masterchef.Service.csproj", "{210BEC4C-5C99-474E-B2C5-D7C4B66B4A4E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFF0CE81-08F4-4271-A4BF-6787857EF006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFF0CE81-08F4-4271-A4BF-6787857EF006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFF0CE81-08F4-4271-A4BF-6787857EF006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFF0CE81-08F4-4271-A4BF-6787857EF006}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B754D06-48D5-45E8-9DD7-2D866E2F2EDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B754D06-48D5-45E8-9DD7-2D866E2F2EDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B754D06-48D5-45E8-9DD7-2D866E2F2EDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B754D06-48D5-45E8-9DD7-2D866E2F2EDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3541733A-9361-43BA-AF20-F1FA355B32EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3541733A-9361-43BA-AF20-F1FA355B32EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3541733A-9361-43BA-AF20-F1FA355B32EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3541733A-9361-43BA-AF20-F1FA355B32EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{210BEC4C-5C99-474E-B2C5-D7C4B66B4A4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{210BEC4C-5C99-474E-B2C5-D7C4B66B4A4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{210BEC4C-5C99-474E-B2C5-D7C4B66B4A4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{210BEC4C-5C99-474E-B2C5-D7C4B66B4A4E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BFF0CE81-08F4-4271-A4BF-6787857EF006} = {1EB50D47-6FF9-4EDA-A385-8A36597FA3AE}
+		{2B754D06-48D5-45E8-9DD7-2D866E2F2EDD} = {1EB50D47-6FF9-4EDA-A385-8A36597FA3AE}
+		{3541733A-9361-43BA-AF20-F1FA355B32EB} = {1EB50D47-6FF9-4EDA-A385-8A36597FA3AE}
+		{210BEC4C-5C99-474E-B2C5-D7C4B66B4A4E} = {1EB50D47-6FF9-4EDA-A385-8A36597FA3AE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B20E2EA-3A7B-48B0-A037-AB1DC7EEFD68}
+	EndGlobalSection
+EndGlobal

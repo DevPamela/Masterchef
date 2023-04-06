@@ -1,0 +1,93 @@
+﻿@model Recipe
+
+@{
+    ViewBag.Title = "Cadastro de Receita";
+}
+
+<h2>Cadastro de Receita</h2>
+
+<form asp-controller="cadastrarReceita" asp-action="create" method="post" >
+    <div class="form-group">
+        <label for="title">Título</label>
+        <input type="text" class="form-control" id="title" name="Title" required>
+    </div>
+    <div class="form-group">
+        <label for="foto">Foto</label>
+        <input type="text" class="form-control" id="foto" name="Foto" required>
+    </div>
+    <div class="form-group">
+        <label for="tags">Tags</label>
+        <input type="number" class="form-control" id="tags" name="Tags" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Descrição</label>
+        <textarea class="form-control" id="description" name="Description" rows="3" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="category">Categoria</label>
+        <select class="form-control" id="category" name="Category.Title" required>
+            <option value="">Selecione uma categoria</option>
+            <option value="1">Doces</option>
+            <option value="2">Carnes</option>
+            <option value="3">Aves</option>
+            <option value="4">Frutos do Mar</option>
+            <option value="5">Saladas</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Ingredientes</label>
+        <ul id="ingredients">
+            <li >
+                <input type="text" name="ingredients[0].Name">
+                <button type="button" class="btn btn-danger" onclick="$(this).closest('li').remove()">Remover</button>
+            </li>
+        </ul>
+        <button type="button" class="btn btn-primary" onclick="adicionarIngrediente()">Adicionar Ingrediente</button>
+    </div>
+    <div class="form-group">
+        <label >Modo de Preparo</label>
+        <ul id="prepareModes">
+            <li>
+                <input type="text" name="prepareModes[0].Name">
+                <button type="button" class="btn btn-danger" onclick="$(this).closest('li').remove()">Remover</button>
+            </li>
+        </ul>
+        <button type="button" class="btn btn-primary" onclick="adicionarModoDePreparo()">Adicionar Modo de Preparo</button>
+    </div>
+
+    <span asp-validation-for="Title" class="text-danger"></span>
+    <br/>
+    <button type="submit" class="btn btn-success" >Salvar</button>
+    <a href="@Url.Action("Index", "Recipe")" class="btn btn-default">Cancelar</a>
+
+</form>
+
+<script>
+    let ingredientsCount = 0;
+    let prepareModesCount = 0;
+    function adicionarIngrediente() {
+        ingredientsCount++
+        var ingredientes = $("#ingredients");
+        var li = $("<li>");
+        var input = $("<input>").attr("type", "text").attr("name", `ingredients[${ingredientsCount}].Name`);
+        var button = $("<button>").attr("type", "button").addClass("btn").addClass("btn-danger").text("Remover").on("click", function () {
+            $(this).closest("li").remove();
+        });
+        li.append(input).append(button);
+        ingredientes.append(li);
+    }
+
+    function adicionarModoDePreparo() {
+        prepareModesCount++
+        var modoDePreparo = $("#prepareMode");
+        var li = $("<li>");
+        var input = $("<input>").attr("type", "text").attr("name", `prepareModes[${prepareModesCount}].Name`);
+        var button = $("<button>").attr("type", "button").addClass("btn").addClass("btn-danger").text("Remover").on("click", function () {
+            $(this).closest("li").remove();
+        });
+        li.append(input).append(button);
+        modoDePreparo.append(li);
+    }
+
+</script>
+

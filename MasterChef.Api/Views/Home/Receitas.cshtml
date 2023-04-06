@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Minhas Receitas</title>
+</head>
+<body>
+<h1>Minhas Receitas</h1>
+<ul id="receitas"></ul>
+
+<script>
+        function carregarReceitas() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:5053/receitas", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            // quando a resposta chegar, adiciona as receitas à página
+            xhr.onload = function() {
+                var receitas = JSON.parse(xhr.responseText);
+                var listaReceitas = document.getElementById("receitas");
+
+                receitas.forEach(function(receita) {
+                    var li = document.createElement("li");
+                    li.innerHTML = receita.nome + " - " + receita.descricao;
+                    listaReceitas.appendChild(li);
+                });
+            };
+            
+            xhr.send();
+        }
+        
+        carregarReceitas();
+    </script>
+    <script>
+        var botaoBuscar = document.querySelector("button[type='submit']");
+        botaoBuscar.addEventListener("click", function (evento) {
+            evento.preventDefault(); // previne o comportamento padrão do botão
+            carregarReceitas();
+        });
+    </script>
+</body>
+</html>

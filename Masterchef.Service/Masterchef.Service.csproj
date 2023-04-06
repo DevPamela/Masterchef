@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Masterchef.Domain\Masterchef.Domain.csproj" />
+    <ProjectReference Include="..\MasterChef.Infra\MasterChef.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>
