@@ -9,30 +9,36 @@
 <form asp-controller="cadastrarReceita" asp-action="create" method="post" >
     <div class="form-group">
         <label for="title">Título</label>
-        <input type="text" class="form-control" id="title" name="Title" required>
+        <input type="text" class="form-control" id="title" name="Title" value="@Model.Title" required>
     </div>
     <div class="form-group">
         <label for="foto">Foto</label>
-        <input type="text" class="form-control" id="foto" name="Foto" required>
-    </div>
-    <div class="form-group">
-        <label for="tags">Tags</label>
-        <input type="number" class="form-control" id="tags" name="Tags" required>
+        <input type="text" class="form-control" id="foto" name="Foto" value="@Model.Foto" required>
     </div>
     <div class="form-group">
         <label for="description">Descrição</label>
-        <textarea class="form-control" id="description" name="Description" rows="3" required></textarea>
+        <textarea class="form-control" id="description" name="Description" rows="3" value="@Model.Description" required></textarea>
     </div>
     <div class="form-group">
         <label for="category">Categoria</label>
         <select class="form-control" id="category" name="Category.Title" required>
             <option value="">Selecione uma categoria</option>
-            <option value="1">Doces</option>
-            <option value="2">Carnes</option>
-            <option value="3">Aves</option>
-            <option value="4">Frutos do Mar</option>
-            <option value="5">Saladas</option>
+            <option value="Doces">Doces</option>
+            <option value="Carnes">Carnes</option>
+            <option value="Aves">Aves</option>
+            <option value="Frutos do Mar">Frutos do Mar</option>
+            <option value="Saladas">Saladas</option>
         </select>
+    </div>
+    <div class="form-group">
+        <label>Tags</label>
+        <ul id="tags">
+            <li>
+                <input type="text" name="tags[0].Name">
+                <button type="button" class="btn btn-danger" onclick="$(this).closest('li').remove()">Remover</button>
+            </li>
+        </ul>
+        <button type="button" class="btn btn-primary" onclick="adicionarTags()">Adicionar Tags</button>
     </div>
     <div class="form-group">
         <label>Ingredientes</label>
@@ -56,6 +62,9 @@
     </div>
 
     <span asp-validation-for="Title" class="text-danger"></span>
+    <span asp-validation-for="Tags" class="text-danger"></span>
+    <span asp-validation-for="Ingredients" class="text-danger"></span>
+    <span asp-validation-for="PrepareModes" class="text-danger"></span>
     <br/>
     <button type="submit" class="btn btn-success" >Salvar</button>
     <a href="@Url.Action("Index", "Recipe")" class="btn btn-default">Cancelar</a>
@@ -65,6 +74,20 @@
 <script>
     let ingredientsCount = 0;
     let prepareModesCount = 0;
+    let tagsCount = 0;
+
+    function adicionarTags() {
+        tagsCount++
+        var ingredientes = $("#tags");
+        var li = $("<li>");
+        var input = $("<input>").attr("type", "text").attr("name", `tags[${ingredientsCount}].Name`);
+        var button = $("<button>").attr("type", "button").addClass("btn").addClass("btn-danger").text("Remover").on("click", function () {
+            $(this).closest("li").remove();
+        });
+        li.append(input).append(button);
+        ingredientes.append(li);
+    }
+
     function adicionarIngrediente() {
         ingredientsCount++
         var ingredientes = $("#ingredients");
@@ -79,7 +102,7 @@
 
     function adicionarModoDePreparo() {
         prepareModesCount++
-        var modoDePreparo = $("#prepareMode");
+        var modoDePreparo = $("#prepareModes");
         var li = $("<li>");
         var input = $("<input>").attr("type", "text").attr("name", `prepareModes[${prepareModesCount}].Name`);
         var button = $("<button>").attr("type", "button").addClass("btn").addClass("btn-danger").text("Remover").on("click", function () {

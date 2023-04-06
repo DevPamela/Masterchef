@@ -11,14 +11,13 @@ namespace MasterChef.Api.Models
 
         public string Foto { get; set; } = string.Empty;
 
-        public int Tags { get; set; }
-
         public string Description { get; set; } = string.Empty;
+        public List<Tags> Tags { get; set; } = new List<Tags>();
 
-        public List<Ingredients> Ingredients { get; set; }
+        public List<Ingredients> Ingredients { get; set; } = new List<Ingredients>();
 
-        public List<PrepareModes> PrepareModes { get; set; }
+        public List<PrepareModes> PrepareModes { get; set; } = new List<PrepareModes>();
 
-        public Category Category { get; set; }
+        public Category Category { get; set; } = new Category();
     }
 }

@@ -28,10 +28,10 @@ namespace Masterchef.Service
             await _recipeContext.SaveChangesAsync();
         }
 
-        public async Task Delete(string title)
+        public async Task Delete(int id)
         {
-           var recipe = _recipeContext.Recipes.FirstOrDefault(_ => _.Title == title);
-           recipe.Title.Remove(0);
+            var recipe = _recipeContext.Recipes.FirstOrDefault(q => q.Id == id);
+            _recipeContext.Recipes.Remove(recipe);
             await _recipeContext.SaveChangesAsync();
         }
 
@@ -47,6 +47,7 @@ namespace Masterchef.Service
                 .Include(q => q.Ingredients)
                 .Include(q => q.PrepareModes)
                 .Include(q => q.Category)
+                .Include(q => q.Tags)
                 .ToListAsync();
         }
     }

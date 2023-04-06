@@ -6,7 +6,7 @@ namespace Masterchef.Service
     {
         Task UpdateRecipe(string title, string ingredients, string mododepreparo);
 
-        Task Delete(string title);
+        Task Delete(int id);
 
         Task<Recipe> GetRecipe(int id);
         Task AddRecipe(Recipe recipe);

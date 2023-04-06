@@ -18,7 +18,7 @@ namespace MasterChef.Api.Controllers
         {
             var recipes = await _recipeService.GetAll();
             
-            return View(recipes);
+            return View(nameof(Index), recipes);
 
         }
         

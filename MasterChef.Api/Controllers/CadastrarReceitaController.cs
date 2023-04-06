@@ -15,7 +15,8 @@ namespace MasterChef.Api.Controllers
         // GET: CadastrarReceitaController
         public ActionResult Index()
         {
-            return View();
+            var recipt = new Recipe();
+            return View(recipt);
         }
 
         // GET: CadastrarReceitaController/Details/5
@@ -37,6 +38,23 @@ namespace MasterChef.Api.Controllers
         {
             try
             {
+                if (receipe.Tags.Any(q => string.IsNullOrEmpty(q.Name)))
+                {
+                    ModelState.AddModelError("Tags", "Tag não pode ser vazia");
+                    return View(nameof(Index), receipe);
+                }
+
+                if (receipe.Ingredients.Count == 0)
+                {
+                    ModelState.AddModelError("Ingredients", "Ingrediente não pode ser vazia");
+                    return View(nameof(Index), receipe);
+                }
+
+                if (receipe.PrepareModes.Count == 0)
+                {
+                    ModelState.AddModelError("PrepareModes", "Modo de preparo não pode ser vazia");
+                    return View(nameof(Index), receipe);
+                }
                 await _recipeService.AddRecipe(receipe);
 
                 return RedirectToAction("Index", "Home");
@@ -51,7 +69,7 @@ namespace MasterChef.Api.Controllers
         // GET: CadastrarReceitaController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: CadastrarReceitaController/Edit/5
@@ -61,7 +79,7 @@ namespace MasterChef.Api.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             catch
             {
@@ -72,7 +90,8 @@ namespace MasterChef.Api.Controllers
         // GET: CadastrarReceitaController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            _recipeService.Delete(id);
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: CadastrarReceitaController/Delete/5
