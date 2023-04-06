@@ -23,7 +23,14 @@ namespace Masterchef.Service
         {
             var recipeDatabase = await GetRecipe(id);
 
-            _recipeContext.Recipes.Entry(recipeDatabase).CurrentValues.SetValues(recipe);
+            recipeDatabase.Title = recipe.Title;
+            recipeDatabase.Description = recipe.Description;
+            recipeDatabase.Foto = recipe.Foto;
+            recipeDatabase.Category = recipe.Category;
+            recipeDatabase.Tags = recipe.Tags;
+            recipeDatabase.Ingredients = recipe.Ingredients;
+            recipeDatabase.PrepareModes = recipe.PrepareModes;
+
             await _recipeContext.SaveChangesAsync();
         }
 

@@ -19,17 +19,17 @@
     </div>
     <div class="form-group">
         <label for="foto">Foto</label>
-        <input type="text" class="form-control" id="foto" name="Foto" value="@Model.Foto" required>
+        <input placeholder="Inserir Link da imagem" type="text" class="form-control" id="foto" name="Foto" value="@Model.Foto" required>
     </div>
     <div class="form-group">
         <label for="description">Descrição</label>
-        <textarea class="form-control" id="description" name="Description" rows="3" value="@Model.Description" required></textarea>
+        <textarea class="form-control" id="description" name="Description" rows="3" required>@Model.Description</textarea>
     </div>
     <div class="form-group">
         <label for="category">Categoria</label>
         <select class="form-control" id="category" name="Category.Title" required>
             <option value="">Selecione uma categoria</option>
-            <option value="Doces">Doces</option>
+            <option selected value="Doces">Doces</option>
             <option value="Carnes">Carnes</option>
             <option value="Aves">Aves</option>
             <option value="Frutos do Mar">Frutos do Mar</option>
@@ -125,7 +125,7 @@
     <span asp-validation-for="PrepareModes" class="text-danger"></span>
     <br/>
     <button type="submit" class="btn btn-success" >Salvar</button>
-    <a href="@Url.Action("Index", "Recipe")" class="btn btn-default">Cancelar</a>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-default">Cancelar</a>
 
 </form>
 
@@ -138,7 +138,7 @@
         tagsCount++
         var ingredientes = $("#tags");
         var li = $("<li>");
-        var input = $("<input>").attr("type", "text").attr("name", `tags[${ingredientsCount}].Name`);
+        var input = $("<input>").attr("type", "text").attr("name", `tags[${tagsCount}].Name`);
         var button = $("<button>").attr("type", "button").addClass("btn").addClass("btn-danger").text("Remover").on("click", function () {
             $(this).closest("li").remove();
         });

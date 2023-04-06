@@ -68,10 +68,11 @@ namespace MasterChef.Api.Controllers
         // POST: CadastrarReceitaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Recipe receipe)
+        public async Task<ActionResult> Edit(int id, Recipe receipe)
         {
             try
             {
+                await _recipeService.UpdateRecipe(id, receipe); 
                 return RedirectToAction("Index", "Home");
             }
             catch
