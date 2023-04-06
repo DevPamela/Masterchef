@@ -19,12 +19,11 @@ namespace Masterchef.Service
             await _recipeContext.SaveChangesAsync();
         }
 
-        public async Task UpdateRecipe(string title,
-            string ingredients, string mododepreparo)
+        public async Task UpdateRecipe(int id, Recipe recipe)
         {
-            var recipeData = _recipeContext.Recipes.ToList().Find(x => x.Title.Equals(title));
-            //recipeData.Ingredientes = ingredients;
-            //recipeData.ModoDePreparo = mododepreparo;
+            var recipeDatabase = await GetRecipe(id);
+
+            _recipeContext.Recipes.Entry(recipeDatabase).CurrentValues.SetValues(recipe);
             await _recipeContext.SaveChangesAsync();
         }
 
@@ -37,7 +36,12 @@ namespace Masterchef.Service
 
         public async Task<Recipe> GetRecipe(int id)
         {
-            var result = await _recipeContext.Recipes.FindAsync(id);
+            var result = await _recipeContext.Recipes
+                .Include(q => q.Ingredients)
+                .Include(q => q.PrepareModes)
+                .Include(q => q.Category)
+                .Include(q => q.Tags)
+                .FirstOrDefaultAsync(q => q.Id == id);
             return result;
         }
 

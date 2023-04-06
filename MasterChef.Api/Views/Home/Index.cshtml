@@ -82,6 +82,13 @@
                 font-size: 20px;
                 font-weight: bold;
             }
+
+            .buttons {
+                display: flex
+            }
+            .btn {
+                margin-right: 1%
+            }
     </style>
 </head>
 <body>
@@ -124,7 +131,7 @@
                 </div>
 
                 <div class="buttons">
-                    <button class="btn btn-warning" >Editar</button>
+                    <a href="cadastrarReceita/edit/@recipe.Id" class="btn btn-warning">Editar</a>
                     <button class="btn btn-danger" onclick="deleteRecipe(@recipe.Id)">Deletar</button>
                 </div>
             </div>
@@ -153,4 +160,6 @@
             }
         });
     }
+
+
 </script>

@@ -4,7 +4,7 @@ namespace Masterchef.Service
 {
     public interface IRecipeService
     {
-        Task UpdateRecipe(string title, string ingredients, string mododepreparo);
+        Task UpdateRecipe(int id, Recipe recipe);
 
         Task Delete(int id);
 

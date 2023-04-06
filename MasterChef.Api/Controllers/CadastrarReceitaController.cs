@@ -1,6 +1,7 @@
 ﻿using Masterchef.Service;
 using MasterChef.Api.Models;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol.Plugins;
 
 namespace MasterChef.Api.Controllers
 {
@@ -38,23 +39,13 @@ namespace MasterChef.Api.Controllers
         {
             try
             {
-                if (receipe.Tags.Any(q => string.IsNullOrEmpty(q.Name)))
+                var invalid = _ValidateRecipe(receipe);
+
+                if(invalid)
                 {
-                    ModelState.AddModelError("Tags", "Tag não pode ser vazia");
                     return View(nameof(Index), receipe);
                 }
 
-                if (receipe.Ingredients.Count == 0)
-                {
-                    ModelState.AddModelError("Ingredients", "Ingrediente não pode ser vazia");
-                    return View(nameof(Index), receipe);
-                }
-
-                if (receipe.PrepareModes.Count == 0)
-                {
-                    ModelState.AddModelError("PrepareModes", "Modo de preparo não pode ser vazia");
-                    return View(nameof(Index), receipe);
-                }
                 await _recipeService.AddRecipe(receipe);
 
                 return RedirectToAction("Index", "Home");
@@ -67,15 +58,17 @@ namespace MasterChef.Api.Controllers
         }
 
         // GET: CadastrarReceitaController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return RedirectToAction("Index", "Home");
+            var recipe = await _recipeService.GetRecipe(id);
+
+            return View(nameof(Index), recipe);
         }
 
         // POST: CadastrarReceitaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Recipe receipe)
         {
             try
             {
@@ -108,5 +101,31 @@ namespace MasterChef.Api.Controllers
                 return View();
             }
         }
+
+
+        private bool _ValidateRecipe(Recipe receipe)
+        {
+            if (receipe.Tags.Any(q => string.IsNullOrEmpty(q.Name)))
+            {
+                ModelState.AddModelError("Tags", "Tag não pode ser vazia");
+                return true;
+            }
+
+            if (receipe.Ingredients.Count == 0)
+            {
+                ModelState.AddModelError("Ingredients", "Ingrediente não pode ser vazia");
+                return true;
+            }
+
+            if (receipe.PrepareModes.Count == 0)
+            {
+                ModelState.AddModelError("PrepareModes", "Modo de preparo não pode ser vazia");
+                return true;
+            }
+
+            return false;
+        }
     }
+    
+
 }
