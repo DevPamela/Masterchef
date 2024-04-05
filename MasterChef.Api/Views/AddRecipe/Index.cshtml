@@ -1,7 +1,7 @@
 ﻿@model Recipe
 
 @{
-    ViewBag.Title = "Cadastro de Receita";
+    ViewBag.Title = "Recipes register";
 
     var action = "edit";
     if(Model.Id == 0)
@@ -10,30 +10,30 @@
     }
 }
 
-<h2>Cadastro de Receita</h2>
+<h2>Recipes register</h2>
 
-<form asp-controller="cadastrarReceita" asp-action="@action" method="post">
+<form asp-controller="AddRecipe" asp-action="@action" method="post">
     <div class="form-group">
-        <label for="title">Título</label>
+        <label for="title">Title</label>
         <input type="text" class="form-control" id="title" name="Title" value="@Model.Title" required>
     </div>
     <div class="form-group">
         <label for="foto">Foto</label>
-        <input placeholder="Inserir Link da imagem" type="text" class="form-control" id="foto" name="Foto" value="@Model.Foto" required>
+        <input placeholder="Insert image title" type="text" class="form-control" id="foto" name="Foto" value="@Model.Foto" required>
     </div>
     <div class="form-group">
-        <label for="description">Descrição</label>
+        <label for="description">Description</label>
         <textarea class="form-control" id="description" name="Description" rows="3" required>@Model.Description</textarea>
     </div>
     <div class="form-group">
-        <label for="category">Categoria</label>
+        <label for="category">Category</label>
         <select class="form-control" id="category" name="Category.Title" required>
-            <option value="">Selecione uma categoria</option>
-            <option selected value="Doces">Doces</option>
-            <option value="Carnes">Carnes</option>
-            <option value="Aves">Aves</option>
-            <option value="Frutos do Mar">Frutos do Mar</option>
-            <option value="Saladas">Saladas</option>
+            <option value="">Choose a category</option>
+            <option selected value="Desserts">Dessert</option>
+            <option value="Meat">Meat</option>
+            <option value="Poultry">Poultry</option>
+            <option value="Seafood">Seafood</option>
+            <option value="Salad">Salad</option>
         </select>
     </div>
     <div class="form-group">
@@ -46,7 +46,7 @@
                 {
                     <li>
                         <input type="text" name="tags[@counter].Name" value="@step.Name">
-                        <button type="button" class="btn btn-danger" onclick="$(this).closest('li').remove()">Remover</button>
+                        <button type="button" class="btn btn-danger" onclick="$(this).closest('li').remove()">Remove</button>
                     </li>
 
                     counter++;
@@ -57,15 +57,15 @@
             {
                 <li>
                     <input type="text" name="tags[0].Name">
-                    <button type="button" class="btn btn-danger" onclick="$(this).closest('li').remove()">Remover</button>
+                    <button type="button" class="btn btn-danger" onclick="$(this).closest('li').remove()">Remove</button>
                 </li>
             }
             
         </ul>
-        <button type="button" class="btn btn-primary" onclick="adicionarTags()">Adicionar Tags</button>
+        <button type="button" class="btn btn-secondary" onclick="addTags()">Add Tags</button>
     </div>
     <div class="form-group">
-        <label>Ingredientes</label>
+        <label>Ingredients</label>
         <ul id="ingredients">
             @if (Model.Ingredients.Count > 0)
             {
@@ -74,7 +74,7 @@
                 {
                     <li>
                         <input type="text" name="ingredients[@counter].Name" value="@step.Name">
-                        <button type="button" class="btn btn-danger" onclick="$(this).closest('li').remove()">Remover</button>
+                        <button type="button" class="btn btn-danger" onclick="$(this).closest('li').remove()">Remove</button>
                     </li>
 
                     counter++;
@@ -85,14 +85,14 @@
             {
                 <li>
                     <input type="text" name="ingredients[0].Name">
-                    <button type="button" class="btn btn-danger" onclick="$(this).closest('li').remove()">Remover</button>
+                    <button type="button" class="btn btn-danger" onclick="$(this).closest('li').remove()">Remove</button>
                 </li>
             }
         </ul>
-        <button type="button" class="btn btn-primary" onclick="adicionarIngrediente()">Adicionar Ingrediente</button>
+        <button type="button" class="btn btn-secondary" onclick="addIngredient()">Add Ingredient</button>
     </div>
     <div class="form-group">
-        <label >Modo de Preparo</label>
+        <label>how to prepare</label>
         <ul id="prepareModes">
             @if (Model.PrepareModes.Count > 0)
             {
@@ -101,7 +101,7 @@
                 {
                     <li>
                         <input type="text" name="prepareModes[@counter].Name" value="@step.Name">
-                        <button type="button" class="btn btn-danger" onclick="$(this).closest('li').remove()">Remover</button>
+                        <button type="button" class="btn btn-danger" onclick="$(this).closest('li').remove()">Remove</button>
                     </li>
 
                     counter++;
@@ -112,11 +112,11 @@
             {
                 <li>
                     <input type="text" name="prepareModes[0].Name">
-                    <button type="button" class="btn btn-danger" onclick="$(this).closest('li').remove()">Remover</button>
+                    <button type="button" class="btn btn-danger" onclick="$(this).closest('li').remove()">Remove</button>
                 </li>
             }
         </ul>
-        <button type="button" class="btn btn-primary" onclick="adicionarModoDePreparo()">Adicionar Modo de Preparo</button>
+        <button type="button" class="btn btn-secondary" onclick="addPreparationMethod">Add Preparation Method</button>
     </div>
 
     <span asp-validation-for="Title" class="text-danger"></span>
@@ -124,8 +124,8 @@
     <span asp-validation-for="Ingredients" class="text-danger"></span>
     <span asp-validation-for="PrepareModes" class="text-danger"></span>
     <br/>
-    <button type="submit" class="btn btn-success" >Salvar</button>
-    <a href="@Url.Action("Index", "Home")" class="btn btn-default">Cancelar</a>
+    <button type="submit" class="btn btn-success" >Salve</button>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-default">Cancell</a>
 
 </form>
 
@@ -134,40 +134,40 @@
     let prepareModesCount = @Model.PrepareModes.Count;
     let tagsCount = @Model.Tags.Count;
 
-    function adicionarTags() {
+    function addTags() {
         tagsCount++
-        var ingredientes = $("#tags");
+        var ingredients = $("#tags");
         var li = $("<li>");
         var input = $("<input>").attr("type", "text").attr("name", `tags[${tagsCount}].Name`);
-        var button = $("<button>").attr("type", "button").addClass("btn").addClass("btn-danger").text("Remover").on("click", function () {
+        var button = $("<button>").attr("type", "button").addClass("btn").addClass("btn-danger").text("Remove").on("click", function () {
             $(this).closest("li").remove();
         });
         li.append(input).append(button);
-        ingredientes.append(li);
+        ingredients.append(li);
     }
 
-    function adicionarIngrediente() {
+    function addIngredient() {
         ingredientsCount++
-        var ingredientes = $("#ingredients");
+        var ingredients = $("#ingredients");
         var li = $("<li>");
         var input = $("<input>").attr("type", "text").attr("name", `ingredients[${ingredientsCount}].Name`);
-        var button = $("<button>").attr("type", "button").addClass("btn").addClass("btn-danger").text("Remover").on("click", function () {
+        var button = $("<button>").attr("type", "button").addClass("btn").addClass("btn-danger").text("Remove").on("click", function () {
             $(this).closest("li").remove();
         });
         li.append(input).append(button);
-        ingredientes.append(li);
+        ingredients.append(li);
     }
 
-    function adicionarModoDePreparo() {
+    function addPreparationMethod() {
         prepareModesCount++
-        var modoDePreparo = $("#prepareModes");
+        var preparationMethod = $("#prepareModes");
         var li = $("<li>");
         var input = $("<input>").attr("type", "text").attr("name", `prepareModes[${prepareModesCount}].Name`);
-        var button = $("<button>").attr("type", "button").addClass("btn").addClass("btn-danger").text("Remover").on("click", function () {
+        var button = $("<button>").attr("type", "button").addClass("btn").addClass("btn-danger").text("Remove").on("click", function () {
             $(this).closest("li").remove();
         });
         li.append(input).append(button);
-        modoDePreparo.append(li);
+        preparationMethod.append(li);
     }
 
 </script>
